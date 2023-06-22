@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        /* Define the container for the floor map */
+        .floor-row {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        
+        .floor-container {
+            margin-bottom: 10px;
+            width: calc(50% - 5px); /* Adjust the width to fit two containers in a row */
+        }
+        
+        .floor-map {
+            width: 700px;
+            height: 850px;
+            border: 1px solid #ccc;
+            position: relative;
+        }
+
+        /* Define the styles for the different areas */
+        .room {
+            position: absolute;
+        }
+
+        .living-room {
+            background-color: #fe5e0e;
+            width: 250px;
+            height: 200px;
+            left: 50px;
+            top: 50px;
+        }
+
+        .kitchen {
+            background-color: #cceecc;
+            width: 250px;
+            height: 200px;
+            left: 400px;
+            top: 50px;
+        }
+
+        .bedroom {
+            background-color: #ddccff;
+            width: 250px;
+            height: 150px;
+            left: 50px;
+            top: 300px;
+        }
+
+        .bathroom {
+            background-color: #ccffff;
+            width: 150px;
+            height: 150px;
+            left: 400px;
+            top: 300px;
+        }
+
+        .dining-room {
+            background-color: #ffeecc;
+            width: 150px;
+            height: 150px;
+            left: 50px;
+            top: 500px;
+        }
+
+        .guest-room {
+            background-color: #ccddff;
+            width: 200px;
+            height: 150px;
+            left: 250px;
+            top: 600px;
+        }
+
+        .study-room {
+            background-color: #ffccdd;
+            width: 150px;
+            height: 150px;
+            left: 460px;
+            top: 500px;
+        }
+
+        /* Different colors for Floor 2 */
+        .floor-container:nth-child(2) .living-room {
+            background-color: #2e0efe;
+        }
+
+        .floor-container:nth-child(2) .kitchen {
+            background-color: #0ad70a;
+        }
+
+        .floor-container:nth-child(2) .bedroom {
+            background-color: #513981;
+        }
+
+        .floor-container:nth-child(2) .bathroom {
+            background-color: #063c3c;
+        }
+
+        .floor-container:nth-child(2) .dining-room {
+            background-color: #6d4a05;
+        }
+
+        .floor-container:nth-child(2) .guest-room {
+            background-color: #040507;
+        }
+
+        .floor-container:nth-child(2) .study-room {
+            background-color: #be134c;
+        }
+
+        /* Different colors for Floor 3 */
+        .floor-container:nth-child(3) .living-room {
+            background-color: #ff0000;
+        }
+
+        .floor-container:nth-child(3) .kitchen {
+            background-color: #00ff00;
+        }
+
+        .floor-container:nth-child(3) .bedroom {
+            background-color: #0000ff;
+        }
+
+        .floor-container:nth-child(3) .bathroom {
+            background-color: #ffff00;
+        }
+
+        .floor-container:nth-child(3) .dining-room {
+            background-color: #ff00ff;
+        }
+
+        .floor-container:nth-child(3) .guest-room {
+            background-color: #00ffff;
+        }
+
+        .floor-container:nth-child(3) .study-room {
+            background-color: #ff8000;
+        }
+
+        /* Different colors for Floor 4 */
+        .floor-container:nth-child(4) .living-room {
+            background-color: #ff9900;
+        }
+
+        .floor-container:nth-child(4) .kitchen {
+            background-color: #6699ff;
+        }
+
+        .floor-container:nth-child(4) .bedroom {
+            background-color: #cc66ff;
+        }
+
+        .floor-container:nth-child(4) .bathroom {
+            background-color: #ffcc00;
+        }
+
+        .floor-container:nth-child(4) .dining-room {
+            background-color: #009933;
+        }
+
+        .floor-container:nth-child(4) .guest-room {
+            background-color: #ff0066;
+        }
+
+        .floor-container:nth-child(4) .study-room {
+            background-color: #663300;
+        }
+
+        /* Dropdown Menu */
+        .dropdown {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 1;
+        }
+
+        .dropdown select {
+            padding: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="floor-row">
+        <div class="floor-container">
+            <h3>Floor 1</h3>
+            <div class="floor-map">
+                <div class="room living-room"></div>
+                <div class="room kitchen"></div>
+                <div class="room bedroom"></div>
+                <div class="room bathroom"></div>
+                <div class="room dining-room"></div>
+                <div class="room guest-room"></div>
+                <div class="room study-room"></div>
+            </div>
+        </div>
+         <div class="floor-container">
+            <h3>Floor 2</h3>
+            <div class="floor-map">
+                <div class="room living-room"></div>
+                <div class="room kitchen"></div>
+                <div class="room bedroom"></div>
+                <div class="room bathroom"></div>
+                <div class="room dining-room"></div>
+                <div class="room guest-room"></div>
+                <div class="room study-room"></div>
+            </div>
+        </div>
+        <div class="floor-container">
+            <h3>Floor 3</h3>
+            <div class="floor-map">
+                <div class="room living-room"></div>
+                <div class="room kitchen"></div>
+                <div class="room bedroom"></div>
+                <div class="room bathroom"></div>
+                <div class="room dining-room"></div>
+                <div class="room guest-room"></div>
+                <div class="room study-room"></div>
+            </div>
+        </div>
+        <div class="floor-container">
+            <h3>Floor 4</h3>
+            <div class="floor-map">
+                <div class="room living-room"></div>
+                <div class="room kitchen"></div>
+                <div class="room bedroom"></div>
+                <div class="room bathroom"></div>
+                <div class="room dining-room"></div>
+                <div class="room guest-room"></div>
+                <div class="room study-room"></div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="dropdown">
+        <select id="Select floor" onchange="showFloor(this.value)">
+            <option>Select Floor</option>
+            <option value="1">Floor 1</option>
+            <option value="2">Floor 2</option>
+            <option value="3">Floor 3</option>
+            <option value="4">Floor 4</option>
+        </select>
+    </div>
+
+    <script>
+        function showFloor(floorNumber) {
+            const floorContainers = document.querySelectorAll('.floor-container');
+            floorContainers.forEach(function(container, index) {
+                if (index + 1 === parseInt(floorNumber)) {
+                    container.style.display = 'block';
+                } else {
+                    container.style.display = 'none';
+                }
+            });
+
+            localStorage.setItem('selectedFloor', floorNumber);
+        }
+
+        // Check if there is a selected floor in local storage and show it
+        const selectedFloor = localStorage.getItem('selectedFloor');
+        if (selectedFloor) {
+            document.getElementById('floorSelect').value = selectedFloor;
+            showFloor(selectedFloor);
+        }
+    </script>
+</body>
+</html>
+
+

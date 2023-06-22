@@ -1,0 +1,431 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Corona Admin</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="{% static 'assets/vendors/mdi/css/materialdesignicons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/css/vendor.bundle.base.css' %}">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <link rel="stylesheet" href="{% static 'assets/vendors/jvectormap/jquery-jvectormap.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/flag-icon-css/css/flag-icon.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/owl-carousel-2/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendors/owl-carousel-2/owl.theme.default.min.css' %}">
+    <style>
+
+
+        /* Define the container for the floor map */
+        .floor-row {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .floor-container {
+            margin-bottom: 20px;
+            width: auto; /* Adjust the width to fit two containers in a row */
+            justify-content: center;
+            margin: 30px 40px;
+        }
+
+        .floor-map {
+            width: 800px;
+            height: 600px;
+            border: 0px solid black;
+            position: relative;
+            background-color: transparent;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+        }
+
+        /* Dropdown Menu */
+     .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropdown select {
+        margin: 30px 40px;
+        padding: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        color: #333;
+        border: 1px solid #ccc;
+        background-color: #fff;
+    }
+
+    /* Optional: Style the dropdown arrow */
+    .dropdown select::after {
+        content: '\25BC';
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        transform: translateY(-50%);
+        pointer-events: none;
+    }
+        /* Blinking Animation */
+        .blink {
+            animation: blinkAnimation 1s infinite;
+        }
+
+        @keyframes blinkAnimation {
+            0% {
+                color: black;
+            }
+            50% {
+                color: red;
+            }
+            100% {
+                color: black;
+            }
+        }
+
+        /* Media Queries for Mobile View */
+        @media (max-width: 767px) {
+            .floor-map {
+                width: 100%;
+                height: 400px;
+            }
+
+            .dropdown {
+                top: 10px;
+                right: 10px;
+            }
+
+            h1, h2 {
+                font-size: 16px;
+            }
+        }
+
+        /* Media Queries for iPad View */
+        @media (min-width: 768px) and (max-width: 1024px) {
+            .floor-map {
+                width: 500px;
+                height: 400px;
+            }
+        }
+         @media (max-width: 767px) {
+        .floor-container {
+            width: 100%;
+            margin: 10px;
+        }
+    }
+
+    /* Media Queries for iPad View */
+    @media (min-width: 768px) and (max-width: 1024px) {
+        .floor-container {
+            width: 50%; /* Adjust the width as per your requirement */
+            margin: 10px;
+        }
+    }
+    </style>
+
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- Layout styles -->
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <!-- End layout styles -->
+    <link rel="shortcut icon" href="{% static 'assets/images/favicon.png' %}" />
+  </head>
+  <body>
+    <div class="container-scroller">
+      <!-- partial:partials/_sidebar.html -->
+      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+        <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
+          <a class="sidebar-brand brand-logo" href="/index"><img src="{% static 'assets/images/Grow Logo.png' %}" width="10" alt="logo" /></a>
+          <a class="sidebar-brand brand-logo-mini" href="/index"><img src="{% static 'assets/images/GMINI.png' %}" alt="logo" /></a>
+        </div>
+        <ul class="nav">
+          <li class="nav-item nav-category">
+            <span class="nav-link">Navigation</span>
+          </li>
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="/index">
+              <span class="menu-icon">
+                <i class="mdi mdi-speedometer"></i>
+              </span>
+              <span class="menu-title">Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="{% url 'apps:vip' %}">
+              <span class="menu-icon">
+                <i class="mdi mdi-playlist-play"></i>
+              </span>
+              <span class="menu-title">Vip Customer</span>
+            </a>
+          </li>
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="{% url 'apps:alocater' %}">
+              <span class="menu-icon">
+                <i class="mdi mdi-table-large"></i>
+              </span>
+              <span class="menu-title">Smart Class Allocator</span>
+            </a>
+          </li>
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="{% url 'apps:year' %}">
+              <span class="menu-icon">
+                <i class="mdi mdi-chart-bar"></i>
+              </span>
+              <span class="menu-title">Peak Time Analyser</span>
+            </a>
+          </li>
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="{% url 'apps:satisfaction' %}">
+              <span class="menu-icon">
+                <i class="mdi mdi-contacts"></i>
+              </span>
+              <span class="menu-title">Customer Analyser</span>
+
+            </a>
+          </li>
+
+          <li class="nav-item menu-items">
+            <a class="nav-link" href="{% url 'apps:automation' %}">
+              <span class="menu-icon">
+                <i class="mdi mdi-file-document-box"></i>
+              </span>
+              <span class="menu-title">Automation</span>
+            </a>
+          </li>
+            <li class="nav-item menu-items">
+            <a class="nav-link" href="{% url 'apps:staff' %}">
+              <span class="menu-icon">
+                <i class="mdi mdi-contacts"></i>
+              </span>
+              <span class="menu-title">Staff Attendance</span>
+
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <!-- partial -->
+      <div class="container-fluid page-body-wrapper">
+        <!-- partial:partials/_navbar.html -->
+        <nav class="navbar p-0 fixed-top d-flex flex-row">
+          <div class="navbar-brand-wrapper d-flex d-lg-none align-items-center justify-content-center">
+            <a class="navbar-brand brand-logo-mini" href="/index"><img src="{% static 'assets/images/GMINI.png' %}" alt="logo" /></a>
+          </div>
+          <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch">
+            <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+              <span class="mdi mdi-menu"></span>
+            </button>
+            <ul class="navbar-nav w-100">
+              <li class="nav-item w-100">
+                <form class="nav-link mt-2 mt-md-0 d-none d-lg-flex search">
+                  <input type="text" class="form-control" placeholder="Search products">
+                </form>
+              </li>
+            </ul>
+            <ul class="navbar-nav navbar-nav-right">
+              <li class="nav-item nav-settings d-none d-lg-block">
+                <a class="nav-link" href="#">
+                  <i class="mdi mdi-view-grid"></i>
+                </a>
+              </li>
+              <li class="nav-item dropdown border-left">
+                <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
+                  <i class="mdi mdi-bell"></i>
+                  <span class="count bg-danger"></span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
+                  <h6 class="p-3 mb-0">Notifications</h6>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item preview-item">
+                    <div class="preview-thumbnail">
+                      <div class="preview-icon bg-dark rounded-circle">
+                        <i class="mdi mdi-calendar text-success"></i>
+                      </div>
+                    </div>
+                    <div class="preview-item-content">
+                      <p class="preview-subject mb-1">Event today</p>
+                      <p class="text-muted ellipsis mb-0"> Just a reminder that you have an event today </p>
+                    </div>
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item preview-item">
+                    <div class="preview-thumbnail">
+                      <div class="preview-icon bg-dark rounded-circle">
+                        <i class="mdi mdi-settings text-danger"></i>
+                      </div>
+                    </div>
+                    <div class="preview-item-content">
+                      <p class="preview-subject mb-1">Settings</p>
+                      <p class="text-muted ellipsis mb-0"> Update dashboard </p>
+                    </div>
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item preview-item">
+                    <div class="preview-thumbnail">
+                      <div class="preview-icon bg-dark rounded-circle">
+                        <i class="mdi mdi-link-variant text-warning"></i>
+                      </div>
+                    </div>
+                    <div class="preview-item-content">
+                      <p class="preview-subject mb-1">Launch Admin</p>
+                      <p class="text-muted ellipsis mb-0"> New admin wow! </p>
+                    </div>
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <p class="p-3 mb-0 text-center">See all notifications</p>
+                </div>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown">
+                  <div class="navbar-profile">
+                    <img class="img-xs rounded-circle" src="{% static 'assets/images/GMINI.png' %}" alt="">
+                    <p class="mb-0 d-none d-sm-block navbar-profile-name">Grow Amin</p>
+                    <i class="mdi mdi-menu-down d-none d-sm-block"></i>
+                  </div>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="profileDropdown">
+                  <h6 class="p-3 mb-0">Profile</h6>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item preview-item">
+                    <div class="preview-thumbnail">
+                      <div class="preview-icon bg-dark rounded-circle">
+                        <i class="mdi mdi-settings text-success"></i>
+                      </div>
+                    </div>
+                    <div class="preview-item-content">
+                      <p class="preview-subject mb-1">Settings</p>
+                    </div>
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item preview-item">
+                    <div class="preview-thumbnail">
+                      <div class="preview-icon bg-dark rounded-circle">
+                        <i class="mdi mdi-logout text-danger"></i>
+                      </div>
+                    </div>
+                    <div class="preview-item-content">
+                      <p class="preview-subject mb-1">Log out</p>
+                    </div>
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <p class="p-3 mb-0 text-center">Advanced settings</p>
+                </div>
+              </li>
+            </ul>
+            <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+              <span class="mdi mdi-format-line-spacing"></span>
+            </button>
+          </div>
+        </nav>
+        <!-- partial -->
+        <div class="main-panel">
+            <br>
+
+
+<div class="container1">
+<div class="dropdown">
+    <select id="SelectFloor" onchange="showFloor(this.value)">
+        <option>Select Floor</option>
+        <option value="1">Floor 1</option>
+        <option value="2">Floor 2</option>
+        <option value="3">Floor 3</option>
+        <option value="4">Floor 4</option>
+    </select>
+</div>
+    <br>
+    <br>
+<h2 class="blink" style="position: absolute; top: 100px; right: 100px;">Live</h2>
+
+<div class="floor-row">
+
+    <div class="floor-container">
+        <hr>
+        <h1>Floor 1</h1>
+        <div class="floor-map" style="background-image: url('{% static 'WhatsApp Image 2023-06-22 at 12.46.30 PM.jpeg' %}');">
+        </div>
+        <h2 class="blink">Total Staffs: 10</h2>
+        <h2 class="blink">Total Customers: 30</h2>
+    </div>
+    <div class="floor-container">
+        <h1>Floor 2</h1>
+        <div class="floor-map" style="background-image: url('{% static 'WhatsApp Image 2023-06-22 at 12.46.30 PM (1).jpeg' %}');">
+        </div>
+        <h2 class="blink">Total Staffs: 22</h2>
+        <h2 class="blink">Total Customers: 40</h2>
+    </div>
+    <div class="floor-container">
+        <h1>Floor 3</h1>
+        <div class="floor-map" style="background-image: url('{% static 'WhatsApp Image 2023-06-22 at 12.46.48 PM.jpeg' %}');">
+        </div>
+        <h2 class="blink">Total Staffs: 45</h2>
+        <h2 class="blink">Total Customers: 30</h2>
+    </div>
+    <div class="floor-container">
+        <h1>Floor 4</h1>
+        <div class="floor-map" style="background-image: url('{% static 'WhatsApp Image 2023-06-22 at 12.46.30 PM.jpeg' %}');">
+        </div>
+        <h2 class="blink">Total Staffs: 20</h2>
+        <h2 class="blink">Total Customers: 40</h2>
+    </div>
+</div>
+</div>
+
+
+
+        </div>
+
+
+          <!-- content-wrapper ends -->
+          <!-- partial:partials/_footer.html -->
+          <!-- partial -->
+        </div>
+        <!-- main-panel ends -->
+      </div>
+      <!-- page-body-wrapper ends -->
+
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+    <script>
+    function showFloor(floorNumber) {
+        const floorContainers = document.querySelectorAll('.floor-container');
+        floorContainers.forEach(function (container, index) {
+            if (index + 1 === parseInt(floorNumber)) {
+                container.style.display = 'block';
+            } else {
+                container.style.display = 'none';
+            }
+        });
+
+        localStorage.setItem('selectedFloor', floorNumber);
+    }
+
+    // Check if there is a selected floor in local storage and show it
+    const selectedFloor = localStorage.getItem('selectedFloor');
+    if (selectedFloor) {
+        document.getElementById('SelectFloor').value = selectedFloor;
+        showFloor(selectedFloor);
+    }
+</script>
+    <script src="{% static 'assets/vendors/js/vendor.bundle.base.js' %}"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <script src="{% static 'assets/vendors/chart.js/Chart.min.js' %}"></script>
+    <script src="{% static 'assets/vendors/progressbar.js/progressbar.min.js' %}"></script>
+    <script src="{% static 'assets/vendors/jvectormap/jquery-jvectormap.min.js' %}"></script>
+    <script src="{% static 'assets/vendors/jvectormap/jquery-jvectormap-world-mill-en.js' %}"></script>
+    <script src="{% static 'assets/vendors/owl-carousel-2/owl.carousel.min.js' %}"></script>
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="{% static 'assets/js/off-canvas.js' %}"></script>
+    <script src="{% static 'assets/js/hoverable-collapse.js' %}"></script>
+    <script src="{% static 'assets/js/misc.js' %}"></script>
+    <script src="{% static 'assets/js/settings.js' %}"></script>
+    <script src="{% static 'assets/js/todolist.js' %}"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page -->
+    <script src="{% static 'assets/js/dashboard.js' %}"></script>
+    <!-- End custom js for this page -->
+  </body>
+</html>

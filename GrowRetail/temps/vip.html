@@ -1,0 +1,249 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'navbar/fonts/icomoon/style.css' %}">
+
+    <link rel="stylesheet" href="{% static 'navbar/css/owl.carousel.min.css' %}">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'navbar/css/bootstrap.min.css' %}">
+
+    <!-- Style -->
+    <link rel="stylesheet" href="{% static 'navbar/css/style.css' %}">
+
+    <title>Vip</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        .container {
+            position: relative;
+            max-width: 1200px;
+            width: 100%;
+            margin: 40px;
+            padding: 10px;
+        }
+
+        .container .card {
+            position: relative;
+            max-width: 200px;
+            height: 200px;
+            background-color: #ffffff00;
+            margin: 30px 40px;
+            padding: 15px;
+
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+            transition: 0.3s ease-in-out;
+            border-radius: 10px;
+        }
+
+        .container .card:hover {
+            height: 360px;
+        }
+
+        .container .card .image {
+            position: relative;
+            width: 160px;
+            height: 160px;
+            top: -20px;
+            left: 0px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .container .card .image img {
+            width: 160px;
+            height: 160px;
+            border-radius: 10px;
+        }
+
+        .card {
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .container .card .content {
+            position: relative;
+            top: -80px;
+            padding: 10px 15px;
+            color: black;
+            text-align: center;
+            visibility: hidden;
+            opacity: 0;
+            transition: 0.2s ease-in-out;
+        }
+
+        .container .card:hover .content {
+            margin-top: 30px;
+            visibility: visible;
+            opacity: 1;
+            transition-delay: 0s;
+        }
+
+        /* Mobile View */
+        @media (max-width: 767px) {
+            .container {
+                margin: 20px;
+            }
+
+            .container .card {
+                margin: 20px 0;
+                width: 100%;
+            }
+        }
+
+        /* iPad View */
+        @media (min-width: 768px) and (max-width: 1024px) {
+            .container {
+                margin: 30px;
+            }
+
+            .container .card {
+                margin: 30px 20px;
+                width: calc(33.33% - 40px);
+            }
+        }
+    </style>
+
+</head>
+<body style="background: radial-gradient(ellipse farthest-corner at right bottom, #FEDB37 0%, #FDB931 8%, #9f7928 30%, #8A6E2F 40%, transparent 80%),
+                radial-gradient(ellipse farthest-corner at left top, #FFFFFF 0%, #FFFFAC 8%, #D1B464 25%, #5d4a1f 62.5%, #5d4a1f 100%);">
+
+<div class="site-mobile-menu">
+    <div class="site-mobile-menu-header">
+        <div class="site-mobile-menu-close mt-3">
+            <span class="icon-close2 js-menu-toggle"></span>
+        </div>
+    </div>
+    <div class="site-mobile-menu-body"></div>
+</div>
+
+<header class="site-navbar" role="banner">
+
+    <div class="container">
+        <div class="row align-items-center">
+
+            <div class="col-11 col-xl-2">
+    <a class="sidebar-brand brand-logo" href="/index">
+        {% if width <= 767 %}
+            <!-- Logo is hidden on mobile view -->
+            <img src="{% static 'assets/images/Grow Logo.png' %}" alt="logo" style="display: none;">
+        {% else %}
+            <!-- Logo is shown on other views -->
+            <img src="{% static 'assets/images/Grow Logo.png' %}" alt="logo" width="50%">
+        {% endif %}
+    </a>
+</div>
+            <div class="col-12 col-md-10 d-none d-xl-block">
+                <nav class="site-navigation position-relative text-right" role="navigation">
+
+                    <ul class="site-menu js-clone-nav mr-auto d-none d-lg-block">
+                        <li class="active"><a href="/index"><span>Home</span></a></li>
+                        <li><a href=""><span>Vip</span></a></li>
+                        <li><a href=""><span>Medium</span></a></li>
+                        <li><a href=""><span>Low</span></a></li>
+                        <li><a href=""><span>Back</span></a></li>
+                    </ul>
+                </nav>
+            </div>
+
+
+            <div class="d-inline-block d-xl-none ml-md-0 mr-auto py-3" style="position: relative; top: 3px;"><a href="#" class="site-menu-toggle js-menu-toggle text-white"><span class="icon-menu h3"></span></a></div>
+
+        </div>
+
+    </div>
+
+</header>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<div class="container mt-1">
+    <hr>
+    <hr>
+    <hr>
+    <h2>Vip Customer Analyzer</h2>
+    <div class="container">
+        <div class="row">
+            {% for i in images %}
+            <div class="col-md-2.5">
+                <div class="card">
+                    <div class="image">
+                        <img href="#" src="{{ i.image.url }}">
+                    </div>
+                    <br>
+                    <br>
+                    <div class="content">
+                        <button type="button p-2" class="btn btn-outline-success"><b>-- VIP --</b></button><br><br>
+                        <button type="button" class="btn btn-outline-danger"><b>MEDIUM</b></button><br><br>
+                        <button type="button" class="btn btn-outline-warning"><b>- LOW -</b></button><br><br>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'navbar/js/jquery-3.3.1.min.js' %}"></script>
+<script src="{% static 'navbar/js/popper.min.js' %}"></script>
+<script src="{% static 'navbar/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'navbar/js/jquery.sticky.js' %}"></script>
+<script src="{% static 'navbar/js/main.js' %}"></script>
+
+<script>
+    // Delayed display of cards with smooth opacity transition
+    function showCardsWithDelay(cards, delay) {
+        Array.from(cards).forEach(function (card, index) {
+            setTimeout(function () {
+                card.style.opacity = "1";
+            }, index * delay);
+        });
+    }
+
+    // Get all card elements
+    var cards = document.getElementsByClassName("card");
+
+    // Call function to show cards with a 1-second delay and smooth opacity transition
+    showCardsWithDelay(cards, 1000);
+
+    // Card verification functions
+    function verifyColumn(columnIndex) {
+        var column = document.getElementsByClassName("column")[columnIndex - 1];
+        var cards = column.getElementsByClassName("card");
+        for (var i = 0; i < cards.length; i++) {
+            cards[i].classList.remove("red");
+            cards[i].classList.add("green");
+        }
+    }
+
+    function unverifyColumn(columnIndex) {
+        var column = document.getElementsByClassName("column")[columnIndex - 1];
+        var cards = column.getElementsByClassName("card");
+        for (var i = 0; i < cards.length; i++) {
+            cards[i].classList.remove("green");
+            cards[i].classList.add("red");
+        }
+    }
+</script>
+</body>
+
+</html>
